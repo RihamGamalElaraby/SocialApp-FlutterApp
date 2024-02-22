@@ -1,6 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/Layout/socialLayout.dart';
+import 'package:socialapp/components/reusable.dart';
 
 // import 'package:supermarket/layouts/SuperLayout.dart';
 // import 'package:supermarket/screens/register/cubit/registerCubit.dart';
@@ -20,36 +22,9 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
-      // if (state is socialRegisterSuccessStates) {
-      //   if (state.loginModel!.status!) {
-      //     print(state.loginModel?.message);
-      //     print(state.loginModel?.data?.token);
-      //     CacheHelper.saveData(
-      //             key: 'token', value: state.loginModel?.data?.token)
-      //         .then((value) {
-      //       token = state!.loginModel!.data!.token!;
-      //       Fluttertoast.showToast(
-      //           msg: state.loginModel!.message!,
-      //           toastLength: Toast.LENGTH_LONG,
-      //           gravity: ToastGravity.CENTER,
-      //           timeInSecForIosWeb: 5,
-      //           backgroundColor: Colors.green,
-      //           textColor: Colors.black,
-      //           fontSize: 16.0);
-      //       navigatTo(context, SuperLayout);
-      //     });
-      //   } else {
-      //     print(state.loginModel?.message);
-      //     Fluttertoast.showToast(
-      //         msg: state.loginModel!.message!,
-      //         toastLength: Toast.LENGTH_LONG,
-      //         gravity: ToastGravity.CENTER,
-      //         timeInSecForIosWeb: 5,
-      //         backgroundColor: Colors.red,
-      //         textColor: Colors.black,
-      //         fontSize: 16.0);
-      //   }
-      // }
+      if (state is socialCreateUserSuccessStates) {
+        navigateandreplace(context, SocialLayOutScreen());
+      }
     }, builder: (context, state) {
       return Scaffold(
         appBar: AppBar(),
@@ -80,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                       controller: nameController,
                       keyboardType: TextInputType.name,
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return 'please enter your name address';
                         }
                         return null;
@@ -109,7 +84,7 @@ class RegisterScreen extends StatelessWidget {
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return 'please enter your email address';
                         }
                         return null;
@@ -138,7 +113,7 @@ class RegisterScreen extends StatelessWidget {
                       controller: phoneController,
                       keyboardType: TextInputType.phone,
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return 'please enter your phone address';
                         }
                         return null;
@@ -166,17 +141,17 @@ class RegisterScreen extends StatelessWidget {
                     TextFormField(
                       controller: passwarController,
                       onFieldSubmitted: (value) {
-                        // if (formKey.currentState!.validate()) {
-                        //   RegisterCubit.get(context).userRegister(
-                        //       name: nameController.text,
-                        //       phone: phoneController.text,
-                        //       email: emailController.text,
-                        //       Password: passwarController.text);
-                        // }
+                        if (formKey.currentState!.validate()) {
+                          RegisterCubit.get(context).userRegister(
+                              name: nameController.text,
+                              phone: phoneController.text,
+                              email: emailController.text,
+                              Password: passwarController.text);
+                        }
                       },
                       obscureText: RegisterCubit.get(context).isObsecure,
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return 'please enter your passward';
                         }
                         return null;
@@ -218,11 +193,11 @@ class RegisterScreen extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    // RegisterCubit.get(context).userRegister(
-                                    //     phone: phoneController.text,
-                                    //     name: nameController.text,
-                                    //     email: emailController.text,
-                                    //     Password: passwarController.text);
+                                    RegisterCubit.get(context).userRegister(
+                                        phone: phoneController.text,
+                                        name: nameController.text,
+                                        email: emailController.text,
+                                        Password: passwarController.text);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(

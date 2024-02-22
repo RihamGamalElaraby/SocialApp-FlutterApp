@@ -1,9 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:socialapp/Layout/socialLayout.dart';
+import 'package:socialapp/cahceHelper/cache_helper.dart';
 import 'package:socialapp/components/reusable.dart';
 import 'package:socialapp/screens/register/registerScreen.dart';
 
+// import 'package:fluttertoast/fluttertoast_web.dart';
 import 'cubit/loginCubit.dart';
 import 'cubit/loginStates.dart';
 // import 'package:supermarket/layouts/SuperLayout.dart';
@@ -20,42 +24,34 @@ class LoginScreen extends StatelessWidget {
 
     return BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) => {
-              // if (state is socialLoginSucssesStates)
-              {
-                // if (state.loginModel!.status!)
-                //   {
-                //     print(state.loginModel?.message),
-                //     print(state.loginModel?.data?.token),
-                //     CacheHelper.saveData(
-                //             key: 'token',
-                //             value: state.loginModel?.data?.token)
-                //         .then((value) {
-                //       token = state!.loginModel!.data!.token!;
-                //       navigateandreplace(context, SuperLayout());
-                //     }),
-                // Fluttertoast.showToast(
-                //     msg: state.loginModel!.message!,
-                //     toastLength: Toast.LENGTH_LONG,
-                //     gravity: ToastGravity.CENTER,
-                //     timeInSecForIosWeb: 5,
-                //     backgroundColor: Colors.green,
-                //     textColor: Colors.black,
-                //     fontSize: 16.0),
-                // navigatTo(context, SuperLayout),
-                //   }
-                // else
-                //   {
-                //     print(state.loginModel?.message),
-                //     Fluttertoast.showToast(
-                //         msg: state.loginModel!.message!,
-                //         toastLength: Toast.LENGTH_LONG,
-                //         gravity: ToastGravity.CENTER,
-                //         timeInSecForIosWeb: 5,
-                //         backgroundColor: Colors.red,
-                //         textColor: Colors.black,
-                //         fontSize: 16.0)
-                //   }
-              }
+              if (state is socialLoginSucssesStates)
+                {
+                  Fluttertoast.showToast(
+                      msg: 'User Log in',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.black,
+                      fontSize: 16.0),
+                  // navigatTo(context, SuperLayout),
+                  CacheHelper.saveData(key: 'uId', value: state.uId)
+                      .then((value) {
+                    navigatTo(context, SocialLayOutScreen());
+                  })
+                }
+              else
+                {
+                  //     print(state.loginModel?.message),
+                  Fluttertoast.showToast(
+                      msg: 'there is an error',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 5,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.black,
+                      fontSize: 16.0)
+                }
             },
         builder: (context, state) {
           return Scaffold(
@@ -167,9 +163,9 @@ class LoginScreen extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        // LoginCubit.get(context).userLogin(
-                                        //     email: emailController.text,
-                                        //     Password: passwarController.text);
+                                        LoginCubit.get(context).userLogin(
+                                            email: emailController.text,
+                                            Password: passwarController.text);
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(

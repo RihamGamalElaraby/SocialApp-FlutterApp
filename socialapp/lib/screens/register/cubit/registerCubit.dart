@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/models/userModel.dart';
 
 import 'registerStates.dart';
 
@@ -7,39 +10,58 @@ class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(socialRegisterInitialStates());
   static RegisterCubit get(context) => BlocProvider.of(context);
 
-  // LoginModel? loginModel;
-  // void userRegister(
-  //     {required String email,
-  //     required String Password,
-  //     required String name,
-  //     required String phone}) async {
-  //   emit(socialRegisterLoadingStates());
-  //   try {
-  //     final response = await DioHelper.postData(
-  //       url: REGISTER,
-  //       data: {
-  //         'name': name,
-  //         'email': email,
-  //         'phone': phone,
-  //         'password': Password,
-  //       },
-  //     );
-  //     loginModel = LoginModel.fromjson(response.data);
-  //     print(loginModel?.data?.token);
-  //     print(loginModel?.status);
-  //     print(loginModel?.message);
-  //     if (loginModel!.status!) {
-  //       emit(socialRegisterSuccessStates(loginModel));
-  //     } else {
-  //       emit(socialRegisterErrorStates(
-  //           loginModel!.message ?? 'Unknown error occurred'));
-  //     }
-  //   } catch (error) {
-  //     print(error.toString());
-  //     emit(socialRegisterErrorStates(
-  //         'Failed to authenticate. Please try again later.'));
-  //   }
-  // }
+  void userRegister(
+      {required String email,
+      required String Password,
+      required String name,
+      required String phone}) async {
+    print('heelo');
+
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: email,
+      password: Password,
+    )
+        .then((value) {
+      if (value.credential != null) {
+        print(value.credential!.accessToken);
+      }
+      print(value.user!.uid);
+      userCreate(email: email, name: name, phone: phone, uID: value.user!.uid);
+
+      emit(socialRegisterSuccessStates());
+    }).catchError((error) {
+      print(error.toString());
+      emit(socialRegisterErrorStates(error.toString()));
+    });
+  }
+
+  void userCreate({
+    required String email,
+    required String name,
+    required String phone,
+    required String uID,
+  }) {
+    userModel model = userModel(
+      name: name,
+      phone: phone,
+      email: email,
+      uID: uID,
+      isEmailVerivied: false,
+    );
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uID)
+        .set(model.toMap())
+        .then((value) {
+      emit(socialCreateUserSuccessStates());
+    }).catchError((error) {
+      print(error.toString());
+
+      emit(socialCreateUserErrorStates(error.toString()));
+    });
+  }
 
   IconData suffix = Icons.visibility_outlined;
   bool isObsecure = true;
