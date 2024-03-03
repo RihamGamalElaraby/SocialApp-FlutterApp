@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/components/reusable.dart';
 import 'package:socialapp/cubit/SocialGeneralCubit.dart';
 import 'package:socialapp/cubit/SocialGeneralStates.dart';
+import 'package:socialapp/screens/newPostScreen.dart';
 
 class SocialLayOutScreen extends StatelessWidget {
   const SocialLayOutScreen({super.key});
@@ -9,15 +11,19 @@ class SocialLayOutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SocialChangeNewPostState) {
+          navigatTo(context, NewPostScreen());
+        }
+      },
       builder: (context, state) {
         var cubit = SocialCubit.get(context);
         return Scaffold(
           appBar: AppBar(
               actions: [
                 IconButton(
-                    onPressed: () {}, icon: Icon(Icons.notification_add)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.search))
+                    onPressed: () {}, icon: const Icon(Icons.notification_add)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.search))
               ],
               title: Text(
                 cubit.titles[cubit.currentIndex],
@@ -77,9 +83,11 @@ class SocialLayOutScreen extends StatelessWidget {
               onTap: (index) {
                 cubit.changeBottomNav(index);
               },
-              items: [
+              items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
                 BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.post_add), label: 'New post'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person), label: 'Users'),
                 BottomNavigationBarItem(

@@ -47,6 +47,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
       phone: phone,
       email: email,
       uID: uID,
+      bio: 'Write your bio',
+      img:
+          'https://img.freepik.com/free-photo/smiling-confident-businesswoman-posing-with-arms-folded_1262-20950.jpg?w=740&t=st=1709381281~exp=1709381881~hmac=79f6684d79d3f080a90584de2e971350dcbc18df0e17663a26e21699ea28d306',
       isEmailVerivied: false,
     );
 

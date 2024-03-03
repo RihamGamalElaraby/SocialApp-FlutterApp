@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   // navigatTo(context, SuperLayout),
                   CacheHelper.saveData(key: 'uId', value: state.uId)
                       .then((value) {
-                    navigatTo(context, SocialLayOutScreen());
+                    navigatTo(context, const SocialLayOutScreen());
                   })
                 }
               else

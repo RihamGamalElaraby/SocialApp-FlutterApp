@@ -21,7 +21,7 @@ void main() async {
   uId = CacheHelper.getData(key: 'uId');
   Widget widget;
   if (uId != null) {
-    widget = SocialLayOutScreen();
+    widget = const SocialLayOutScreen();
   } else {
     widget = LoginScreen();
   }
@@ -46,7 +46,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final Widget? startWidget;
 
-  MyApp({this.startWidget});
+  const MyApp({super.key, this.startWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'SuperApp',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
           home: startWidget,

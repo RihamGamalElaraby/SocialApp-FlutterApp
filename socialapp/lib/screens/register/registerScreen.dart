@@ -23,7 +23,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
       if (state is socialCreateUserSuccessStates) {
-        navigateandreplace(context, SocialLayOutScreen());
+        navigateandreplace(context, const SocialLayOutScreen());
       }
     }, builder: (context, state) {
       return Scaffold(
