@@ -6,7 +6,7 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           const Card(
@@ -34,15 +34,15 @@ class FeedScreen extends StatelessWidget {
             ]),
           ),
           ListView.separated(
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               height: 10,
             ),
             itemBuilder: (context, index) => buildPostitem(context),
             itemCount: 10,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           )
         ],
@@ -70,31 +70,32 @@ class FeedScreen extends StatelessWidget {
                     width: 15,
                   ),
                   const Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Riham Elaraby',
-                            style: TextStyle(fontSize: 19, height: 1.4),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.blue,
-                            size: 16.0,
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'January 13 , 2021 at 11:00 pm ',
-                        style: TextStyle(fontSize: 14, height: 1.4),
-                      )
-                    ],
-                  )),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Riham Elaraby',
+                              style: TextStyle(fontSize: 19, height: 1.4),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.check_circle,
+                              color: Colors.blue,
+                              size: 16.0,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'January 13 , 2021 at 11:00 pm ',
+                          style: TextStyle(fontSize: 14, height: 1.4),
+                        )
+                      ],
+                    ),
+                  ),
                   const SizedBox(
                     width: 15,
                   ),
@@ -116,88 +117,88 @@ class FeedScreen extends StatelessWidget {
                 'In grammar, an article is any member of a class of dedicated words that are used with noun phrases to mark the identifiability of the referents of the noun phrases. The category of articles constitutes a part of speech.In English, both "the" and "a(n)" are articles, which combine with nouns to form noun phrases. Articles typically specify the grammatical definiteness of the noun phrase, but in many languages, they carry additional grammatical information such as gender, number, and case. Articles are part of a broader category called determiners, which also include demonstratives, possessive determiners, and quantifiers. In linguistic interlinear glossing, articles are abbreviated as art.',
                 style: TextStyle(),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Wrap(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
                             ),
                           )),
                     ),
-                    Container(
+                    SizedBox(
                       height: 25,
                       child: OutlinedButton(
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(0.0),
                             child: Text(
                               '#software',
                               style: TextStyle(color: Colors.blue),
@@ -207,7 +208,7 @@ class FeedScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Container(
@@ -215,7 +216,7 @@ class FeedScreen extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       image: NetworkImage(
                           'https://img.freepik.com/free-photo/close-up-young-happy-family-spending-time-together_329181-15884.jpg?w=826&t=st=1708565798~exp=1708566398~hmac=95591f4a7c00087def860ec1f33e418ff097c997492f23ba671326cb13501287'),
                       fit: BoxFit.cover),
@@ -230,7 +231,7 @@ class FeedScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: InkWell(
                           onTap: () {},
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Icon(Icons.add_reaction_outlined),
@@ -249,8 +250,8 @@ class FeedScreen extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -275,7 +276,7 @@ class FeedScreen extends StatelessWidget {
                 height: 1.0,
                 color: Colors.grey,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Row(children: [
@@ -295,7 +296,7 @@ class FeedScreen extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {},
-                            child: Text(
+                            child: const Text(
                               'Write a comment',
                               style: TextStyle(fontSize: 16),
                             ),
@@ -305,7 +306,7 @@ class FeedScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Icon(Icons.add_reaction_outlined),

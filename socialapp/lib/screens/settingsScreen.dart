@@ -1,58 +1,210 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/components/reusable.dart';
+import 'package:socialapp/cubit/SocialGeneralCubit.dart';
+import 'package:socialapp/cubit/SocialGeneralStates.dart';
+import 'package:socialapp/screens/editProfile.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Container(
-            height: 180,
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
+    return BlocConsumer<SocialCubit, SocialStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var userModel = SocialCubit.get(context).model;
+        if (userModel != null) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
-                Align(
-                  alignment: AlignmentDirectional.topCenter,
-                  child: Container(
-                    height: 120,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                        topRight: Radius.circular(4),
+                SizedBox(
+                  height: 180,
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional.topCenter,
+                        child: Container(
+                          height: 120,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4),
+                              topRight: Radius.circular(4),
+                            ),
+                            image: DecorationImage(
+                              image: NetworkImage('${userModel.Cover}'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://img.freepik.com/free-photo/close-up-young-happy-family-spending-time-together_329181-15884.jpg?w=826&t=st=1708565798~exp=1708566398~hmac=95591f4a7c00087def860ec1f33e418ff097c997492f23ba671326cb13501287'),
-                          fit: BoxFit.cover),
-                    ),
+                      CircleAvatar(
+                        radius: 65.0,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 60.0,
+                          backgroundImage: NetworkImage('${userModel.img}'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                CircleAvatar(
-                  radius: 65.0,
-                  backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 60.0,
-                    backgroundImage: NetworkImage(
-                        'https://img.freepik.com/free-photo/woman-beach-with-her-baby-enjoying-sunset_52683-144131.jpg?w=826&t=st=1709139774~exp=1709140374~hmac=8d5b19c1146e6ef66276e03ff36a3f0012ab93b8c465e41cc3473cbc0cdc723e'),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '${userModel.name}',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${userModel.bio}',
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w300),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Posts',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Followers',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Following',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          child: Column(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Photos',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        child: const Text('Add photos'),
+                      ),
+                    ),
+                    OutlinedButton(
+                      onPressed: () {
+                        navigatTo(context, EditProfile());
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                    // Expanded(
+                    //   child: ElevatedButton(
+                    //     onPressed: () {},
+                    //     style: ElevatedButton.styleFrom(
+                    //       foregroundColor: Colors.white,
+                    //       padding: const EdgeInsets.symmetric(
+                    //           vertical: 8.0, horizontal: 24.0),
+                    //       backgroundColor: Colors.teal,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ), // Text color
+                    //       elevation: 10.0, // Elevation
+                    //     ),
+                    //     child: const Text(
+                    //       'Edit Profile',
+                    //       style: TextStyle(
+                    //         fontSize: 18.0,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
               ],
             ),
-          ),
-          Text(
-            'Reham Elaraby',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Bio',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          )
-, ],
-      ),
+          );
+        } else {
+          return const CircularProgressIndicator(); // Or any other placeholder widget
+        }
+      },
     );
   }
 }
