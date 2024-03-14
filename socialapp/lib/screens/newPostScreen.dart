@@ -54,25 +54,25 @@ class NewPostScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(children: [
                   if (state is SocialCreatePostLoading)
-                    LinearProgressIndicator(),
+                    const LinearProgressIndicator(),
                   if (state is SocialCreatePostLoading)
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 10,
                       ),
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 25.0,
                         backgroundImage: NetworkImage(
                             'https://img.freepik.com/free-photo/woman-beach-with-her-baby-enjoying-sunset_52683-144131.jpg?w=826&t=st=1709139774~exp=1709140374~hmac=8d5b19c1146e6ef66276e03ff36a3f0012ab93b8c465e41cc3473cbc0cdc723e'),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 15,
                       ),
-                      const Expanded(
+                      Expanded(
                         child: Row(
                           children: [
                             Text(
@@ -104,7 +104,7 @@ class NewPostScreen extends StatelessWidget {
                       //   }
                       //   return null;
                       // },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         // label: const Text('Passward'),
                         // focusedErrorBorder: const OutlineInputBorder(
@@ -131,7 +131,7 @@ class NewPostScreen extends StatelessWidget {
                       // ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   if (SocialCubit.get(context).postImage != null)
@@ -155,7 +155,7 @@ class NewPostScreen extends StatelessWidget {
                             onPressed: () {
                               SocialCubit.get(context).removePostImage();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.close,
                               color: Colors.black,
                             ),
@@ -163,7 +163,7 @@ class NewPostScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -174,9 +174,9 @@ class NewPostScreen extends StatelessWidget {
                           onPressed: () {
                             SocialCubit.get(context).getpostImg();
                           },
-                          child: Row(
+                          child: const Row(
                             children: [
-                              const Text('Add Photos'),
+                              Text('Add Photos'),
                               SizedBox(
                                 width: 4,
                               ),
@@ -185,7 +185,7 @@ class NewPostScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(

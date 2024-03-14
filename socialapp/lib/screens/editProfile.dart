@@ -20,16 +20,16 @@ class EditProfile extends StatelessWidget {
         final phoneController = TextEditingController(text: userModel.phone);
 
         ImageProvider<Object>? backgroundImage;
-        if (profileImage == null && userModel != null) {
+        if (profileImage == null) {
           backgroundImage = NetworkImage(userModel.img.toString());
-        } else if (profileImage != null) {
+        } else {
           backgroundImage = FileImage(profileImage);
         }
 
-        var coverBackgroundImage;
-        if (coverImage == null && userModel != null) {
+        ImageProvider<Object>? coverBackgroundImage;
+        if (coverImage == null) {
           coverBackgroundImage = NetworkImage(userModel.Cover.toString());
-        } else if (coverImage != null) {
+        } else {
           coverBackgroundImage = FileImage(coverImage);
         }
 
@@ -63,8 +63,9 @@ class EditProfile extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if (state is SocialUpdateLoading) LinearProgressIndicator(),
-                  Container(
+                  if (state is SocialUpdateLoading)
+                    const LinearProgressIndicator(),
+                  SizedBox(
                     height: 190,
                     child: Stack(
                       alignment: AlignmentDirectional.bottomCenter,
@@ -152,12 +153,12 @@ class EditProfile extends StatelessWidget {
                                   child: const Text('Upload Profile'),
                                 ),
                                 state is SocialUpdateLoading
-                                    ? LinearProgressIndicator()
-                                    : SizedBox(),
+                                    ? const LinearProgressIndicator()
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         if (SocialCubit.get(context).coverImage != null)
@@ -178,8 +179,8 @@ class EditProfile extends StatelessWidget {
                                   child: const Text('Upload Cover'),
                                 ),
                                 state is SocialUpdateLoading
-                                    ? LinearProgressIndicator()
-                                    : SizedBox(),
+                                    ? const LinearProgressIndicator()
+                                    : const SizedBox(),
                               ],
                             ),
                           )
